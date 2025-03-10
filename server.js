@@ -25,6 +25,9 @@ app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 
 // mount routes
+app.get('/', (req, res) => {
+    res.render('index.ejs');
+});
 
 // tell the app the listen for HTTP requests
 app.listen(port, () => {
