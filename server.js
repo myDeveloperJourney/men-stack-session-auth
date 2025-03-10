@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const authController = require('./controllers/auth');
 
 // intialize express app
 const app = express();
@@ -23,6 +24,12 @@ mongoose.connection.on('connected', () => {
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
+
+// fun fact! router code is actually a type of middleware!
+app.use('/auth', authController);
+// any HTTP requests from the brower that come to /auth....
+// will automatically be forward to the router code
+// inside of the authController
 
 // mount routes
 app.get('/', (req, res) => {
