@@ -62,7 +62,15 @@ router.post('/sign-in', async (req, res) => {
         _id: userInDatabase._id
     };
 
+    console.log(req.session);
+
     res.redirect('/');
+});
+
+router.get('/sign-out', (req, res) => {
+    req.session.destroy(); 
+    // destroying the session object "ends" the login session
+    res.redirect('/'); // return home after logout
 });
 
 module.exports = router;
